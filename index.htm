@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ArduinoYunLedWeb</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type='text/javascript'>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                document.querySelectorAll('.anim').forEach(function (element, id) {
+                    element.addEventListener('click', function() {
+                        var httpRequest = new XMLHttpRequest();
+                        var anim = element.getAttribute('value');
+                        var color = document.querySelector('.color');
+                        color = color.options[color.selectedIndex].value;
+                        var url = '/arduino/animation/' + element.getAttribute('value');
+                        if (anim === "ease") {
+                            url += '/' + color;
+                        }
+                        httpRequest.open('GET', url);
+                        httpRequest.send();
+                    });
+                });
+            });
+        </script>
+        <style>
+            * {
+                font-family: Arial;
+                font-size: 20px;
+            }
+            .anim {
+                background: #00979c;
+                border-radius: 28px;
+                color: #ffffff;
+                padding: 10px 20px 10px 20px;
+                width:200px;
+                border: 0;
+                margin: 2px;
+            }
+
+            .anim:hover {
+                background: #005254;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <img src="logo.png"><br><br>
+            <button class="anim" value="lava">Lava</button>
+            <button class="anim" value="fire">Fire</button><br>
+            <button class="anim" value="Rainbow">Rainbow</button>
+            <button class="anim" value="twinkle">Twinkle</button><br>
+            <button class="anim" value="confetti">Confetti</button>
+            <button class="anim" value="sinleon">Sinelon</button><br>
+            <button class="anim" value="juggle">Juggle</button>
+            <button class="anim" value="bpm">BPM</button><br>
+            <button class="anim" value="ease">Ease</button>
+            <button class="anim" value="qbounce">Bounce</button><br>
+            <hr>
+            <button class="anim" value="nextpattern">Next Pattern</button>
+            <button class="anim" value="auto">Auto</button><br><br>
+            Color:
+            <select name="color" class="color">
+                <option value="blue">Blue</option>
+                <option value="yellow">Yellow</option>
+                <option value="red">Red</option>
+                <option value="white">White</option>
+                <option value="green">Green</option>
+                <option value="purple">Purple</option>
+            </select>
+        </center>
+    </body>
+</html>
